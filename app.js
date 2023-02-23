@@ -67,22 +67,55 @@ console.log(sortHighToLow([
 //Q4 
 
 async function  PostByUser(num) {
-  let newRecord = [];
   const Promise = await fetch( "https://jsonplaceholder.typicode.com/posts");
-  console.log(Promise.json());
   const Data = await Promise.json();
- console.log(Data);
+  let newRecord = [];
   for (let i = 0; i < Data.length; i++) {
     if (Data[i].userId === num )  {
-         newRecord.push(Data[i]);
+        newRecord.push(Data[i]);
     }
   }
-return newRecord
+  console.log(newRecord)
 }
-console.log(PostByUser(4))
+
+PostByUser(4)
+
+// short method 
+
+async function  PostByUser2(num) {
+  const Promise = await fetch( "https://jsonplaceholder.typicode.com/posts");
+  const Data = await Promise.json();
+  const posts = Data.filter(elem => elem.userId === num)
+  console.log(posts)
+}
+
+PostByUser2(4)
+
+//Q5  show first 6  incomplete todos
+
+async function  incomplete() {
+  const Promise = await fetch( "https://jsonplaceholder.typicode.com/todos");
+  const Data = await Promise.json();
+  const posts = Data.filter(elem => !elem.completed  && Data.indexOf(elem) <= 6);
+  console.log(posts);
+}
+
+incomplete()
 
 
-//Q5
+
+
+// slice method 
+
+
+async function  incomplete2() {
+  const Promise = await fetch( "https://jsonplaceholder.typicode.com/todos");
+  const Data = await Promise.json();
+  const posts = Data.filter(elem => !elem.completed).slice(0,6);
+  console.log(posts);
+}
+
+incomplete2()
 
 //Q6
 
